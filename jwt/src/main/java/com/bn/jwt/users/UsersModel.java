@@ -9,8 +9,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-@Table(name = "users")
-@Entity(name = "users")
+@Table(name = "user")
+@Entity(name = "user")
 public class UsersModel implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,10 +40,9 @@ public class UsersModel implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(this.role == UserRole.ADMIN) return
-                List.of(new SimpleGrantedAuthority("ADMIN"),
-                new SimpleGrantedAuthority("USER"));
-           else  return  List.of(new SimpleGrantedAuthority("USER"));
+     if(this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ADMIN")
+     , new SimpleGrantedAuthority("USER"));
+     else return    List.of(new SimpleGrantedAuthority("USER"));
     }
 
     public String getPassword() {
